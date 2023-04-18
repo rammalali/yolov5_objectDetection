@@ -18,7 +18,7 @@ from detect import run
 
 
 # load the model
-model_path = "runs/train/exp/weights/best.onnx"
+model_path = "runs/train/exp/weights/yolov5.onnx"
 session = onnxruntime.InferenceSession(model_path)
 
 
@@ -137,13 +137,17 @@ def txt_to_json(txt):
 
 @app.get("/models")
 def list_models():
-    return {"models": ["BMW_1"]}
+    return {"models": ["yolov5", "faster-rcnn"]}
 
 
 @app.get("/labels/{model_name}")
 def get_labels(model_name: str):
-    if model_name == "BMW_1":
+    if model_name == "yolov5":
         return {"labels": ["Dolly", "Wheel"]}
+    
+    elif model_name == "faster-rcnn":
+        return {"labels": ["Dolly", "Wheel"]}
+    
     else:
         return JSONResponse(status_code=404, content={"detail": "Model not found"})
 
@@ -164,15 +168,16 @@ def get_json(item: BASE64_input, model_name: str):
             name="exp",
         )
 
-    elif model_name == "mobilenet":
-        run(
-            weights="runs/train/exp/weights/best.onnx",
-            conf_thres=0.25,
-            source="images_from_base64",
-            save_txt=True,
-            save_conf=True,
-            name="exp",
-        )
+    elif model_name == "faster-rcnn":
+        return {"label": "model not done yet!"}
+        # run(
+        #     weights="runs/train/exp/weights/best.onnx",
+        #     conf_thres=0.25,
+        #     source="images_from_base64",
+        #     save_txt=True,
+        #     save_conf=True,
+        #     name="exp",
+        # )
 
     else:
         raise HTTPException(status_code=404, detail="Model Not Found !")
@@ -198,17 +203,17 @@ async def predict_box(model_name: str, file: UploadFile = File(...)):  # async f
     with open(f"data/images/{file.filename}", "wb") as f:
         f.write(contents)
 
-    if model_name == "yolov5":
-        # os.rmtree("runs/detect/exp5")
-        run(
-            weights="runs/train/exp/weights/best.onnx",
-            conf_thres=0.25,
-            source="data/images",
-            save_txt=True,
-            save_conf=True,
-            name="exp",
-        )
-    elif model_name == "mobilenet":
+    if model_name == "faster-rcnn":
+        return {"label": "model not done yet!"}
+        # run(
+        #     weights="runs/train/exp/weights/best.onnx",
+        #     conf_thres=0.25,
+        #     source="data/images",
+        #     save_txt=True,
+        #     save_conf=True,
+        #     name="exp",
+        # )
+    elif model_name == "faster-rcnn":
         run(
             weights="runs/train/exp/weights/best.onnx",
             conf_thres=0.25,
@@ -238,17 +243,17 @@ async def predict_json(
     with open(f"data/images/{file.filename}", "wb") as f:
         f.write(contents)
 
-    if model_name == "yolov5":
-        # os.rmtree("runs/detect/exp5")
-        run(
-            weights="runs/train/exp/weights/best.onnx",
-            conf_thres=0.25,
-            source="data/images",
-            save_txt=True,
-            save_conf=True,
-            name="exp",
-        )
-    elif model_name == "mobilenet":
+    if model_name == "faster-rcnn":
+        return {"label": "model not done yet!"}
+        # run(
+        #     weights="runs/train/exp/weights/best.onnx",
+        #     conf_thres=0.25,
+        #     source="data/images",
+        #     save_txt=True,
+        #     save_conf=True,
+        #     name="exp",
+        # )
+    elif model_name == "faster-rcnn":
         run(
             weights="runs/train/exp/weights/best.onnx",
             conf_thres=0.25,
