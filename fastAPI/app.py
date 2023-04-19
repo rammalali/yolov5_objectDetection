@@ -17,7 +17,7 @@ try:
 except Exception as e:
     print('[ERROR] Load error in app.py: ', e)
 
-model_path = "runs/train/exp/weights/yolov5.onnx"
+model_path = "runs/train/exp/weights/yolov5s.onnx"
 conf_threshold = 0.65
 app = FastAPI()
 
@@ -112,15 +112,15 @@ def txt_to_json(txt, image_width=1280, image_height=720):
 
 @app.get("/models")
 async def list_models():
-    return {"models": ["yolov5", "faster-rcnn"]}
+    return {"models": ["yolov5s", "yolov5m"]}
 
 @app.get("/labels/{model_name}")
 def get_labels(model_name: str):
     logging.info('[INFO] Get Labels Request Received')
-    if model_name == "yolov5":
+    if model_name == "yolov5s":
         return {"labels": ["Dolly", "Wheel"]}
     
-    elif model_name == "faster-rcnn":
+    elif model_name == "yolov5m":
         return {"labels": ["Dolly", "Wheel"]}
     
     else:
@@ -131,9 +131,9 @@ def get_json(item: BASE64Input, model_name: str):
     remove_dir("runs/detect/exp")
     base64_to_image(item.image_path)
 
-    if model_name == "yolov5":
+    if model_name == "yolov5s":
         run(
-            weights="runs/train/exp/weights/yolov5.onnx",
+            weights="runs/train/exp/weights/yolov5s.onnx",
             conf_thres=conf_threshold,
             source="images_from_base64",
             save_txt=True,
@@ -141,8 +141,15 @@ def get_json(item: BASE64Input, model_name: str):
             name="exp",
         )
 
-    elif model_name == "faster-rcnn":
-        return {"label": "model not done yet!"}
+    elif model_name == "yolov5m":
+        run(
+            weights="runs/train/exp/weights/yolov5s.onnx",
+            conf_thres=conf_threshold,
+            source="images_from_base64",
+            save_txt=True,
+            save_conf=True,
+            name="exp",
+        )
 
     else:
         raise HTTPException(status_code=404, detail="Model Not Found !")
@@ -164,9 +171,9 @@ async def predict_box(model_name: str, file: UploadFile = File(...)):
     with open(f"data/images/{file.filename}", "wb") as f:
         f.write(contents)
 
-    if model_name == "yolov5":
+    if model_name == "yolov5s":
         run(
-            weights="runs/train/exp/weights/yolov5.onnx",
+            weights="runs/train/exp/weights/yolov5s.onnx",
             conf_thres=conf_threshold,
             source="data/images",
             save_txt=True,
@@ -174,8 +181,15 @@ async def predict_box(model_name: str, file: UploadFile = File(...)):
             name="exp",
         )
 
-    elif model_name == "faster-rcnn":
-        return {"label": "model not done yet!"}
+    elif model_name == "yolov5m":
+        run(
+            weights="runs/train/exp/weights/yolov5m.onnx",
+            conf_thres=conf_threshold,
+            source="data/images",
+            save_txt=True,
+            save_conf=True,
+            name="exp",
+        )
 
     else:
         raise HTTPException(status_code=404, detail="Model Not Found !")
@@ -191,9 +205,9 @@ async def predict_json(model_name: str, file: UploadFile = File(...)):
     with open(f"data/images/{file.filename}", "wb") as f:
         f.write(contents)
 
-    if model_name == "yolov5":
+    if model_name == "yolov5s":
         run(
-            weights="runs/train/exp/weights/yolov5.onnx",
+            weights="runs/train/exp/weights/yolov5s.onnx",
             conf_thres=conf_threshold,
             source="data/images",
             save_txt=True,
@@ -201,8 +215,15 @@ async def predict_json(model_name: str, file: UploadFile = File(...)):
             name="exp",
         )
 
-    elif model_name == "faster-rcnn":
-        return {"label": "model not done yet!"}
+    elif model_name == "yolov5m":
+        run(
+            weights="runs/train/exp/weights/yolov5m.onnx",
+            conf_thres=conf_threshold,
+            source="data/images",
+            save_txt=True,
+            save_conf=True,
+            name="exp",
+        )
 
     else:
         raise HTTPException(status_code=404, detail="Model Not Found !")

@@ -3,12 +3,7 @@ FROM python:3.9
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the app.py and other required files into the container at /app
-COPY ../app.py .
 COPY ../requirements.txt .
-
-# Copy the current directory contents into the container at /app
-COPY . /app
 
 # Install system dependencies for OpenCV
 # RUN apt-get update && \
@@ -23,9 +18,14 @@ COPY requirements.txt .
 # RUN pip install --no-cache-dir --trusted-host pypi.python.org -r requirements.txt
 RUN pip install -r requirements.txt
 
-RUN pip install python-multipart
+# RUN pip install python-multipart
 # RUN pip install seaborn
 
+# Copy the app.py and other required files into the container at /app
+COPY ../app.py .
+
+# Copy the current directory contents into the container at /app
+COPY . /app
 
 # ADD app.py
 EXPOSE 80
