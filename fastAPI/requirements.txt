@@ -5,13 +5,13 @@ fastapi
 uvicorn
 typing
 pydantic
-python-multipart
+# python-multipart
 
 # Base ------------------------------------------------------------------------
 gitpython>=3.1.30
 matplotlib>=3.3
 numpy>=1.18.5
-opencv-python>=4.1.1
+opencv-python-headless
 Pillow>=7.1.2
 psutil  # system resources
 PyYAML>=5.3.1
@@ -29,8 +29,8 @@ tqdm>=4.64.0
 # comet
 
 # Plotting --------------------------------------------------------------------
-pandas>=1.1.4
-seaborn>=0.11.0
+# pandas>=1.1.4
+# seaborn>=0.11.0
 
 # Export ----------------------------------------------------------------------
 # coremltools>=6.0  # CoreML export
@@ -44,7 +44,7 @@ seaborn>=0.11.0
 # openvino-dev  # OpenVINO export
 
 # Deploy ----------------------------------------------------------------------
-setuptools>=65.5.1 # Snyk vulnerability fix
+# setuptools>=65.5.1 # Snyk vulnerability fix
 # tritonclient[all]~=2.24.0
 
 # Extras ----------------------------------------------------------------------

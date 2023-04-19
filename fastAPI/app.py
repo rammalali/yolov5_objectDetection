@@ -107,7 +107,7 @@ def txt_to_json(txt, image_width=1280, image_height=720):
 
 
 @app.get("/models")
-def list_models():
+async def list_models():
     return {"models": ["yolov5", "faster-rcnn"]}
 
 
