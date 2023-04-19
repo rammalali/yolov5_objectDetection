@@ -14,7 +14,7 @@ data/samples/*
 # Neural Network weights -----------------------------------------------------------------------------------------------
 **/*.pt
 **/*.pth
-**/*.onnx
+; **/*.onnx
 **/*.engine
 **/*.mlmodel
 **/*.torchscript
