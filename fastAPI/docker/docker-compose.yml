@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: your-image-name
+    container_name: "object-detection-api"
+    ports:
+      - "8000:80"
+    environment:
+      - NAME=World
+    volumes:
+      - app-data:/app/data
+
+volumes:
+  app-data: {}
