@@ -20,9 +20,12 @@ COPY . /app
 COPY requirements.txt .
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir --trusted-host pypi.python.org -r requirements.txt
+# RUN pip install --no-cache-dir --trusted-host pypi.python.org -r requirements.txt
+RUN pip install -r requirements.txt
 
-RUN pip install pandas
+RUN pip install python-multipart
+# RUN pip install seaborn
+
 
 # ADD app.py
 EXPOSE 80

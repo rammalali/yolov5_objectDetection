@@ -1,17 +1,21 @@
-from typing import Union, Any
-import os
-import shutil
-import json
-import base64
-import uuid
+try:
+    import os
+    import uuid
+    import json
+    import shutil
+    import base64
+    import logging
 
-from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import JSONResponse, FileResponse
-from pydantic import BaseModel
-from PIL import Image
-from io import BytesIO
+    from PIL import Image
+    from io import BytesIO
+    from typing import Union, Any
+    from pydantic import BaseModel
+    from fastapi.responses import JSONResponse, FileResponse
+    from fastapi import FastAPI, File, UploadFile, HTTPException
 
-from detect import run
+    from detect import run
+except Exception as e:
+    print('[ERROR] Load error in app.py: ', e)
 
 model_path = "runs/train/exp/weights/yolov5.onnx"
 conf_threshold = 0.65
@@ -110,9 +114,9 @@ def txt_to_json(txt, image_width=1280, image_height=720):
 async def list_models():
     return {"models": ["yolov5", "faster-rcnn"]}
 
-
 @app.get("/labels/{model_name}")
 def get_labels(model_name: str):
+    logging.info('[INFO] Get Labels Request Received')
     if model_name == "yolov5":
         return {"labels": ["Dolly", "Wheel"]}
     

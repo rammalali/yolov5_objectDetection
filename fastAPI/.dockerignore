@@ -2,7 +2,7 @@
 .git
 .cache
 .idea
-runs
+# runs
 output
 coco
 storage.googleapis.com
