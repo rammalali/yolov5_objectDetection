@@ -16,4 +16,4 @@ This project uses different architectures of YOLOv5 for object detection of Doll
 
 This project was created by [Ali Rammal](https://github.com/rammalali) for [inmind.academy].
 
-We hope you find this project helpful. Please feel free to contribute or raise issues if you find any problems. Thank you! 
+Hope you find this project helpful. Please feel free to contribute or raise issues if you find any problems. Thank you! 
