@@ -143,7 +143,7 @@ def get_json(item: BASE64Input, model_name: str):
 
     elif model_name == "yolov5m":
         run(
-            weights="runs/train/exp/weights/yolov5s.onnx",
+            weights="runs/train/exp/weights/yolov5m.onnx",
             conf_thres=conf_threshold,
             source="images_from_base64",
             save_txt=True,
