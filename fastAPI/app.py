@@ -6,7 +6,7 @@ try:
     import base64
     import logging
 
-    from PIL import Image
+    from PIL import  Image
     from io import BytesIO
     from typing import Union, Any
     from pydantic import BaseModel
