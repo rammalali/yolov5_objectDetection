@@ -12,6 +12,19 @@ This project uses different architectures of YOLOv5 for object detection of Doll
 
 - `Dockerfile`: This file contains the code for Dockerizing the application.
 
+## Build
+
+To build the Docker image for this project, please follow these steps:
+
+1. Navigate to the `/fastAPI` directory in your terminal.
+2. Run the following command to build the Docker image:
+
+   ```docker build -f docker/Dockerfile -t objectDetection .```
+
+   This command will use the Dockerfile located in the `docker` directory and tag the resulting image with the name `objectDetection`.
+
+Note: Make sure you have Docker installed on your system before proceeding with the above steps.
+
 ## Credits
 
 This project was created by [Ali Rammal](https://github.com/rammalali) for [inmind.academy].
