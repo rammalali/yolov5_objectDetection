@@ -21,7 +21,7 @@ To build the Docker image for this project, please follow these steps:
 
    ```docker build -f docker/Dockerfile -t objectDetection .```
 
-   This command will use the Dockerfile located in the `docker` directory and tag the resulting image with the name `objectDetection`.
+   This command will use the Dockerfile located in the `docker` directory and tag the resulting image with the name `object_detection`.
 
 Note: Make sure you have Docker installed on your system before proceeding with the above steps.
 
